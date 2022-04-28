@@ -22,7 +22,7 @@ int fakeEvent(String fakeEvent) {
     }
 }
 
-//toggle LED light
+//toggle LED light for wave
 void waveToggle() {
         digitalWrite(MY_LED, HIGH);
 	    delay(1s);
@@ -30,6 +30,7 @@ void waveToggle() {
 	    delay(1s);
 }
 
+//toggle LED light for pat
 void patToggle() {
         digitalWrite(MY_LED, HIGH);
 	    delay(4s);
