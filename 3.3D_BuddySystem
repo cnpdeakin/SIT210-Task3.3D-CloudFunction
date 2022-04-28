@@ -1,0 +1,42 @@
+
+const pin_t MY_LED = D6;
+
+// The setup() method is called once when the device boots.
+void setup() {
+
+	pinMode(MY_LED, OUTPUT);
+	Particle.subscribe("Deakin_RIOT_SIT210_Photon_Buddy", myHandler);
+	Particle.function("Simulate fake event", fakeEvent);
+}
+
+
+//when post is triggered, this function publishes the event to the console
+int fakeEvent(String fakeEvent) {
+    Particle.publish("Deakin_RIOT_SIT210_Photon_Buddy", fakeEvent);
+
+    if(fakeEvent == "wave") {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+//toggle LED light
+void ledToggle() {
+        digitalWrite(MY_LED, HIGH);
+	    delay(1s);
+	    digitalWrite(MY_LED, LOW);
+	    delay(1s);
+}
+
+//dictates what the device should do when simulated buddy particle publishes the matching event.
+void myHandler(const char *event, const char *data) {
+    
+    if(strcmp(data,"wave") == 0) {
+        ledToggle();
+        ledToggle();
+        ledToggle();
+    }
+}
+
